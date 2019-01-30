@@ -1,0 +1,7 @@
+*.pyc
+*.pyo
+venv/
+logs/
+__pycache__/
+.idea/
+**/captchas/
