@@ -1,7 +1,11 @@
 *.pyc
 *.pyo
+*.ipynb
 venv/
 logs/
 __pycache__/
 .idea/
+.ipynb_checkpoints/
 **/captchas/
+**/cropped/
+owen2016.pdf

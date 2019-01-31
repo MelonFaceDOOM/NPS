@@ -1,7 +1,7 @@
 import requests
 import stem.process
 from queue import Queue
-from threading import Thread
+from threading import Thread, Lock
 
 # create 10 Tor Clients
 ports = [('905' + str(i), '906' + str(i)) for i in range(10)]
@@ -20,8 +20,6 @@ for cfg in tor_configs:
     session.proxies['https'] = 'socks5h://localhost:{}'.format(port)
     sessions.append(session)
 
-        
-        
 # Creating the Task database will be handled separately.
 # It will have to be site-specific. The methodology by which the
 # database of links is generated will vary greatly based on the structure of each site-specific
@@ -29,12 +27,11 @@ for cfg in tor_configs:
 task_database = "" #location of database. Alternatively, the database could be passed to this program as an argument
 #This could also just be a list of urls
 
+utls = # values in database where completed = False
+
 # It doesn't make sense to fetch a batches of urls, becuase then you are waiting
 # for the slowest thread to finished before you go and get the next batch.
 # Instead, get all urls and add all to queue.
-# Create a separate list or db of completed urls that is updated as urls as scraped
-# The very first step in this program could be to compare the two lists and remove anything
-# from the completed list from the list of urls to scrape
 
 for tor_client in tor_clients:
     scraper = Scraper(tor_client=tor_client)
@@ -42,7 +39,7 @@ for tor_client in tor_clients:
     scraper.scrape(url)
     
 q = Queue(maxsize=0)
-num_threads = min(10, len(urls))
+num_threads = min(50, len(urls))
 results = [{} for x in urls]
 
 for i in range(len(urls)):
@@ -54,6 +51,15 @@ for i in range(len(urls)):
     # getting a new identity
     # responding to 404
     
+lck = Lock()
+
+def mark_task_completed(url):
+    global lck
+    lck.acquire()
+    #update row associated with task in database to mark that it has been completed
+    #commit
+    lck.release()
+    
 def scrape(q, session, result):
     while not q.empty():
         work = q.get()
@@ -63,8 +69,7 @@ def scrape(q, session, result):
         except:
             result[work[0]] = {}
             
-        with open("completed_urls.txt") as f:
-            f.write(work[1]+"\n")
+        mark_task_complete(work[1])
         q.task_done()
     return True
     
