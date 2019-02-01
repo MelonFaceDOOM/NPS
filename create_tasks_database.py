@@ -23,7 +23,6 @@ def create_tasks_database():
     # insert values into database and close
     c.executemany("INSERT INTO Tasks (url, completed) \
         VALUES (?, ?)", data_urls)
-    # todo - confirm that no duplicate urls have been added
     conn.commit()
     conn.close()
     return os.path.abspath(filename) # todo confirm this works as expected
@@ -35,12 +34,10 @@ def init_db(filename):
     conn = sqlite3.connect(filename)
 
     c = conn.cursor()
-    # todo - confirm that id values are actually being automatically inserted
-    # todo - attempt entering int value other than 0 or 1 in the completed variable
     # in order to confirm boolean restriction is working correctly
     c.execute('''CREATE TABLE Tasks
-        (url TEXT NOT NULL,
-        completed BOOLEAN NOT NULL CHECK (COMPLETED IN(0,1)),
+        (url TEXT NOT NULL UNIQUE,
+        completed BOOLEAN NOT NULL CHECK (completed IN(0,1)),
         page_text STRING,
         identified_timestamp DATETIME default current_timestamp,
         scraped_timestamp DATETIME);''')

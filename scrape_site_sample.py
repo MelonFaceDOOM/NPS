@@ -1,3 +1,11 @@
+'''
+This is not a functioning program yet, it was 
+just helpful for me to envision the structure
+of the program by putting together some
+of the basics here. See multi_threaded_scrape.py for
+the latest functioning queue/scraping script
+'''
+
 import requests
 import stem.process
 from queue import Queue
@@ -24,12 +32,12 @@ for cfg in tor_configs:
 # It will have to be site-specific. The methodology by which the
 # database of links is generated will vary greatly based on the structure of each site-specific
 
-task_database = "" #location of database. Alternatively, the database could be passed to this program as an argument
-#This could also just be a list of urls
+task_database = "" # location of database. Alternatively, the database could be passed to this program as an argument
+# This could also just be a list of urls
 
 utls = # values in database where completed = False
 
-# It doesn't make sense to fetch a batches of urls, becuase then you are waiting
+# It doesn't make sense to fetch batches of urls, becuase then you are waiting
 # for the slowest thread to finished before you go and get the next batch.
 # Instead, get all urls and add all to queue.
 

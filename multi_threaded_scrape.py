@@ -1,3 +1,15 @@
+'''
+take in a sql database with a list of URLs and scrape each url,
+adding the text of the page to the database. Databse format is:
+Table name: Tasks
+Columns:
+    url TEXT NOT NULL UNIQUE,
+    completed BOOLEAN NOT NULL CHECK (completed IN(0,1)),
+    page_text STRING,
+    identified_timestamp DATETIME default current_timestamp,
+    scraped_timestamp DATETIME
+'''
+
 from queue import Queue
 import requests
 from threading import Thread, Lock
@@ -11,7 +23,6 @@ def mark_task_completed(conn, page_text, url):
     global lck
     lck.acquire()
     c = conn.cursor()
-    # todo - add checks to make sure that the URL value is present and that there is only 1 value that is found
     c.execute("UPDATE Tasks SET completed = 1 WHERE url = ?", (url,))
     c.execute("UPDATE Tasks SET page_text = ? WHERE url = ?", (page_text, url))
     c.execute("UPDATE Tasks SET scraped_timestamp = ? WHERE url = ?", (datetime.utcnow(), url))
