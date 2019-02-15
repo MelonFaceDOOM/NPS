@@ -25,7 +25,7 @@ def create_tasks_database():
         VALUES (?, ?)", data_urls)
     conn.commit()
     conn.close()
-    return os.path.abspath(filename) # todo confirm this works as expected
+    return os.path.abspath(filename)  # todo confirm this works as expected
 
     
 def init_db(filename):

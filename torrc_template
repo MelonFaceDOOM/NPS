@@ -1,6 +1,6 @@
 #RunAsDaemon 1
 #HashedControlPassword 16:872860B76453A77D60CA2BB8C1A7042072093276A3D701AD684053EC4C
 #CookieAuthentication 1
-DataDirectory etc/tor{i}
+DataDirectory etc/tor{SOCKSPort}
 SOCKSPort {SOCKSPort}
 ControlPort {ControlPort}

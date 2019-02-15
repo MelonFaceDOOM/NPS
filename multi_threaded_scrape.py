@@ -15,12 +15,12 @@ from create_tasks_database import create_tasks_database
 from datetime import datetime
 import sqlite3
 import os
-import subprocess
-from create_multiple_torrc_files import create_torrc_files
+from tor_session import TorSession
 
 
 THREADS_PER_SESSION = 10
 NUMBER_OF_SESSIONS = 10
+
 
 # todo - this may be very inefficient
 # todo - consider saving progress in chunks
@@ -36,11 +36,11 @@ def mark_task_completed(conn, page_text, url):
     lck.release()
 
 
-def scrape(q, conn):
+def scrape(tor_session, q, conn):
     while not q.empty():
         work = q.get()
         try:
-            page_text = requests.get(work[1]).text
+            page_text = tor_session.get(work[1]).text
         except requests.exceptions.RequestException as e:
             page_text = e
         mark_task_completed(conn, page_text, work[1])
@@ -48,24 +48,43 @@ def scrape(q, conn):
     return True
 
 
-current_dir = os.path.dirname(os.path.realpath(__file__))
-torrcs = create_torrc_files(NUMBER_OF_SESSIONS, current_dir)
+tor_sessions = []
+tor_dir = "etc/tor/"
+for i in range(NUMBER_OF_SESSIONS):
 
-# todo - test the following
-sessions = []
-for torrc in torrcs:
-    subprocess.call(['sudo', 'tor', '-f', torrc["path"]])
-    session = requests.session()
-    session.proxies = {}
-    session.proxies['http'] = 'socks5h://localhost:{}'.format(torrc["SOCKSPort"])
-    session.proxies['https'] = 'socks5h://localhost:{}'.format(torrc["SOCKSPort"])
-    sessions.append(session)
+    SOCKSPort = 40000 + i
+    ControlPort = 41000 + i
 
-# todo - run a test to confirm that all subprocesses are working and have unique IPs.
-# todo - if any are not working or have the same IP, get new identity (max retries = 5 or so)
+    torrc_dir = os.path.join(tor_dir, "torrc.{}".format(i))
+
+    tor_session = TorSession(SOCKSPort=SOCKSPort,
+                             ControlPort=ControlPort,
+                             torrc_dir=torrc_dir)
+    tor_sessions.append(tor_session)
+
+# for each session, ensure IP is unique.
+# for duplicates, get new identity
+# max retries for each duplicate = 5
+# after max retries, remove the session from the list of sessions
+ips = []
+for tor_session in tor_sessions:
+    ip = tor_session.ip
+    retries = 0
+    while True:
+        if ip not in ips:
+            break
+        elif retries > 4:
+            tor_sessions.remove(tor_session)
+            print("A Tor session was removed after failing to acquire a unique identity")
+            break
+        ip = tor_session.get_new_identity()
+        retries += 1
+    ips.append(ip)
 
 db_filepath = create_tasks_database()
 conn = sqlite3.connect(db_filepath, check_same_thread=False)
+# modifying conn.row_factory modifies how sqlite will return values when running queries.
+# specifically, it forces it to return a list instead of a list of tuples
 conn.row_factory = lambda cursor, row: row[0]
 c = conn.cursor()
 urls = c.execute("SELECT url FROM Tasks WHERE completed == 0").fetchall()
@@ -74,16 +93,13 @@ lck = Lock()
     
 q = Queue(maxsize=0)
 
-num_threads = min(50, len(urls))
-
 # fill task queue
 for i in range(len(urls)):
     q.put((i, urls[i]))
     
-# This would make X threads per session
-for session in sessions:
+for tor_session in tor_sessions:
     for i in range(THREADS_PER_SESSION):
-        worker = Thread(target=scrape, args=(session,q,conn))
+        worker = Thread(target=scrape, args=(tor_session, q, conn))
         worker.setDaemon(True)
         worker.start()
 q.join()
