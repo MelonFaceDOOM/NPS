@@ -1,0 +1,180 @@
+1550592832512	geckodriver	INFO	Listening on 127.0.0.1:56330
+1550592833207	geckodriver::marionette	INFO	Starting browser C:\Users\JMILLER.AD\AppData\Local\Mozilla Firefox\firefox.exe with args ["-marionette"]
+1550592834575	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1550592834575	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1550592834799	Marionette	DEBUG	Received observer notification profile-after-change
+1550592834981	Marionette	DEBUG	Received observer notification toplevel-window-ready
+1550592835061	Marionette	DEBUG	Received observer notification command-line-startup
+1550592835061	Marionette	DEBUG	Received observer notification nsPref:changed
+1550592835061	Marionette	DEBUG	Init aborted (running=false, enabled=true, finalUIStartup=false)
+1550592835555	Marionette	DEBUG	Received observer notification toplevel-window-ready
+1550592837578	Marionette	DEBUG	Received observer notification sessionstore-windows-restored
+1550592837578	Marionette	DEBUG	GFX sanity window detected, waiting until it has been closed...
+1550592838697	Marionette	DEBUG	Received observer notification domwindowclosed
+1550592838697	Marionette	DEBUG	Waiting for delayed startup...
+1550592838701	Marionette	DEBUG	Setting recommended pref app.normandy.api_url to 
+1550592838702	Marionette	DEBUG	Setting recommended pref app.update.disabledForTesting to true
+1550592838702	Marionette	DEBUG	Setting recommended pref security.turn_off_all_security_so_that_viruses_can_take_over_this_computer to true
+1550592838703	Marionette	DEBUG	Setting recommended pref browser.contentblocking.introCount to 99
+1550592838703	Marionette	DEBUG	Setting recommended pref browser.safebrowsing.passwords.enabled to false
+1550592838703	Marionette	DEBUG	Setting recommended pref browser.urlbar.suggest.searches to false
+1550592838705	Marionette	DEBUG	Setting recommended pref datareporting.policy.dataSubmissionPolicyAccepted to false
+1550592838705	Marionette	DEBUG	Setting recommended pref dom.disable_beforeunload to true
+1550592838706	Marionette	DEBUG	Setting recommended pref dom.file.createInChild to true
+1550592838706	Marionette	DEBUG	Setting recommended pref toolkit.cosmeticAnimations.enabled to false
+1550592838778	Marionette	INFO	Listening on port 56337
+1550592838778	Marionette	DEBUG	Remote service is active
+1550592839534	Marionette	DEBUG	Accepted connection 0 from 127.0.0.1:56364
+1550592839538	Marionette	TRACE	0 -> [0,1,"newSession",{"acceptInsecureCerts":true,"browserName":"firefox","capabilities":{"desiredCapabilities":{"acceptInsecureCerts":true,"browserName":"firefox"}}}]
+1550592839539	Marionette	TRACE	0 <- [1,1,{"error":"unknown command","message":"newSession","stacktrace":"WebDriverError@chrome://marionette/content/error.js:178: ... et@chrome://marionette/content/server.js:236:8\n_onJSONObjectReady/<@chrome://marionette/content/transport.js:490:9\n"},null]
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:750:13
+
+1550593016721	addons.productaddons	WARN	Failed downloading via XHR, status: 0, reason: error
+1550593112340	Marionette	DEBUG	Closed connection 0
+[Child 14956, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 14956, Chrome_ChildThread] WARNING: [Child 10200, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 10200, Chr1550594133280	Marionette	DEBUG	Received observer notification xpcom-will-shutdown
+1550594133280	Marionette	DEBUG	Resetting recommended pref app.normandy.api_url
+1550594133280	Marionette	DEBUG	Resetting recommended pref app.update.disabledForTesting
+1550594133280	Marionette	DEBUG	Resetting recommended pref security.turn_off_all_security_so_that_viruses_can_take_over_this_computer
+1550594133281	Marionette	DEBUG	Resetting recommended pref browser.contentblocking.introCount
+1550594133281	Marionette	DEBUG	Resetting recommended pref browser.safebrowsing.passwords.enabled
+1550594133281	Marionette	DEBUG	Resetting recommended pref browser.urlbar.suggest.searches
+1550594133281	Marionette	DEBUG	Resetting recommended pref datareporting.policy.dataSubmissionPolicyAccepted
+1550594133281	Marionette	DEBUG	Resetting recommended pref dom.disable_beforeunload
+1550594133282	Marionette	DEBUG	Resetting recommended pref dom.file.createInChild
+1550594133283	Marionette	DEBUG	Resetting recommended pref toolkit.cosmeticAnimations.enabled
+1550594133284	Marionette	INFO	Stopped listening on port 56337
+1550594133284	Marionette	DEBUG	Remote service is inactive
+[GPU 9168, Chrome_Ch
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+ild/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 161550594128729	Marionette	INFO	Stopped listening on port 56778
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 1584
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1550607040705	mozrunner::runner	INFO	Running command: "C:\\Users\\JMILLER.AD\\AppData\\Local\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\JMILLER.AD\\AppData\\Local\\Temp\\rust_mozprofile.SWChwYPai5mE"
+1550607042421	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1550607042421	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1550607046708	Marionette	INFO	Listening on port 53181
+1550607046747	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Parent 3124, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Parent 3124, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 2948, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17136, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17136, Chrome_ChildThr[Parent 3124, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 10524, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 105241550607141991	Marionette	INFO	Stopped listening on port 53181
+[GP
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+U 
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1550607253324	mozrunner::runner	INFO	Running command: "C:\\Users\\JMILLER.AD\\AppData\\Local\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\JMILLER.AD\\AppData\\Local\\Temp\\rust_mozprofile.Nf7mQ4q8vJH7"
+1550607255035	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1550607255035	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1550607259886	Marionette	INFO	Listening on port 53542
+[Child 15652, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 1561550607259986	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:750:13
+
+[Parent 17396, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17344, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17344, Chrome_ChildThread] WAR[Parent 17396, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17260, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17260, Chrome_ChildThr[Parent 17396, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Parent 17396, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17756, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chrom[ium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 17756, Chrome_ChildThread] WARNING: pipe error: 109: fiChild 15168, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 15168, C[Parent 17396, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 10280, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Chil1550609508868	Marionette	INFO	Stopped listening on port 53542
+[GPU 12040, Chr
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+ome_ChildThread
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1550609510645	mozrunner::runner	INFO	Running command: "C:\\Users\\JMILLER.AD\\AppData\\Local\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\JMILLER.AD\\AppData\\Local\\Temp\\rust_mozprofile.vH1YfujDLsg2"
+1550609511787	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1550609511787	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+[Child 18116, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 18116, Chrom1550609515646	Marionette	INFO	Listening on port 55686
+1550609516057	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:750:13
+
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:750:13
+
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:750:13
+
+[Child 17472, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child[Parent 15160, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 8088, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child1550783066953	Marionette	INFO	Stopped listening on port 55686
+[GP
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+U 
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+l be ignored for this session
+JavaScript error: http://lchudifyeqm4ldjj.onion/?ai=1675, line 8: NS_ERROR_NOT_AVAILABLE: 
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:750:13
+
+[Parent 6944, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Parent 6944, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 12748, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, [Child 15232, Chrome_ChildThreline a346
+d] WARNING: pipe error: 109: file z:/build/build/src/ip[c/chromium/src/chrome/Cchild 12748, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chroome/common/ipc_channel_win.mcmon/ipc_channel_win.cc,c line 346
+[ChiJavaScript error: resource:///modules/WindowsJumpLists.jsm, line 250: TypeError: this._builder is undefined
+[Child 6752, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Chil1550759058725	Marionette	INFO	Stopped listening on port 59185
+[GPU 6308
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+,
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
