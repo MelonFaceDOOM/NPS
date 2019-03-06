@@ -8,7 +8,7 @@
 import re
 import time
 from lxml import html
-
+import requests
 from tor_session import TorSession
 from dm_login import dm_login
 
@@ -22,11 +22,18 @@ cookies = dm_login(url=URL, username=USERNAME, password=PASSWORD, port=tor_sessi
 tor_session.pass_cookies(cookies)
 
 page_content = tor_session.get("{}/?category=104".format(URL))
-tree = html.fromstring(page_content)
+tree = html.fromstring(page_content.text)
 
 drug_categories = tree.xpath("//div[@class='category  depth1']/a")
+for d in drug_categories:
+    cat_url = requests.compat.urljoin(URL, d.attrib['href'])
+    tor_session.get(cat_url)
+    sub_cats = tree.xpath("//div[@class='category  depth2']/a")
+    for s in sub_cats:
+        sub_cat_url = requests.compat.urljoin(URL, s.attrib['href'])
+        print(sub_cat_url)
 
-
+# todo - still in development. Had to stop since dream market was getting ddosed
 def main():
 
     #######################

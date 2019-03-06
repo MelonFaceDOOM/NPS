@@ -47,7 +47,7 @@ class TorSession(requests.Session):
                 controller.authenticate()  # todo - add authentication information
                 controller.signal(Signal.NEWNYM)
             new_ip = self.get('http://httpbin.org/ip').text
-            if new_ip != self.ip
+            if new_ip != self.ip:
                 self.ip = new_ip
             if retries >= max_retries:
                 warnings.warn("Warning: Unable to obtain new identity after {} tries".format(max_retries))

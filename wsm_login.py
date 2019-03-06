@@ -3,7 +3,11 @@ from PIL import Image
 from io import BytesIO
 from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import ElementClickInterceptedException
+import sys
 
 def wsm_login(url, username, password, port):
 
@@ -35,25 +39,43 @@ def wsm_login(url, username, password, port):
     options = webdriver.FirefoxOptions()
     options.headless = True
     driver = webdriver.Firefox(firefox_binary=binary, firefox_profile=profile, options=options)
-    driver.get(url)
 
     # Complete first captcha to get to login page
     while True:
+        driver.get(url)
         im = get_captcha_image(driver)
         im.show()
         captcha_text = input("Please enter captcha text")
         driver.find_element_by_xpath("//input[@id='form_captcha']").send_keys(captcha_text)
         # Submit the form
-        driver.find_element_by_xpath("//button[@class=' btn btn-block btn3d btn-info']").click()
-    
-        # break out of loop if captcha succeeded
-        if captcha_succeeded(driver):
+        try:
+            driver.find_element_by_xpath("//button[@class=' btn btn-block btn3d btn-info']").click()
+        
+        # Try to account for rare error where the submit button is obscured
+        # There are ways to bypass this and submit anyway, but I suspect this could be a test to see if the user is a machine
+        # So I think it is better to simply re-load the page and try again
+        except ElementClickInterceptedException:
+            driver.get(url)
+            continue
+
+        element = WebDriverWait(driver,60).until(
+            lambda driver: driver.find_elements(By.ID,"form_username") or \
+            driver.find_elements_by_xpath(
+                '//div[(@class="alert alert-danger width-100") and (contains(text(),"One or more errors occured"))]'))
+
+        if element[0].get_attribute("id") == "form_username":
             break
+        elif element[0].get_attribute("class") == "alert alert-danger width-100": # captcha failed message
+            pass
+        else:
+            sys.exit("unable to identify whether or not captcha succeeded")   
     
     # Complete the actual login page
     while True:
+        driver.get(url)
         # Enter the username
         input_element = driver.find_element_by_xpath("//input[@id='form_username']")
+
         input_element.clear()  # Clear field because if captcha failed the username will still remain
         input_element.send_keys(username)
         # Enter the password
@@ -69,9 +91,18 @@ def wsm_login(url, username, password, port):
         # Submit the form
         driver.find_element_by_xpath("//button[@class='btn btn-sm btn-primary']").click()
         
-        # break out of loop if captcha succeeded
-        if captcha_succeeded(driver):
+        
+        element = WebDriverWait(driver,60).until(
+            lambda driver: driver.find_elements(By.ID,"menu-t-1") or \
+            driver.find_elements_by_xpath(
+                '//div[(@class="alert alert-danger width-100") and (contains(text(),"One or more errors occured"))]'))
+
+        if element[0].get_attribute("id") == "menu-t-1":
             break
+        elif element[0].get_attribute("class") == "alert alert-danger width-100": # captcha failed message
+            pass
+        else:
+            sys.exit("unable to identify whether or not captcha succeeded")    
 
     return driver.get_cookies()
 
@@ -93,16 +124,6 @@ def get_captcha_image(driver):
 
     # Open image and have user input answer
     return Image.open(BytesIO(base64.b64decode(img_captcha_base64)))
-    
-def captcha_succeeded(driver):
-    try:
-        # still on login page, try again
-        driver.find_element_by_xpath(
-            "//div[@class, 'alert alert-danger width-100' and contains(text(),'One or more errors occured')]")
-        return False
-    except:
-        # captcha did not fail.
-        return True
 
 if __name__ == "__main__":
     get_captcha_image()
