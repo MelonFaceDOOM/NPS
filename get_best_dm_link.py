@@ -40,7 +40,7 @@ def get_best_dm_link():
         new_list.append((l['url'],len(successful_responses),average))
         
     # sort first by number of successful responses, then average response time as a tie-breaker
-    sorted_urls = sorted(new_list, key=lambda x: (-x[1],x[2]))
+    sorted_urls = sorted(new_list, key=lambda x: (-x[1], x[2]))
     best_url = sorted_urls[0][0]
 
     return best_url

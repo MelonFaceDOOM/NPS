@@ -1061,3 +1061,83 @@ console.error: BroadcastService:
   Stack:
     remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:750:13
 
+1552322131888	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.eSUkQchwJkJ6"
+Running Firefox as root in a regular user's session is not supported.  ($HOME is /home/jacob which is owned by jacob.)
+1552322164125	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.im9IH6jn353n"
+Running Firefox as root in a regular user's session is not supported.  ($HOME is /home/jacob which is owned by jacob.)
+1552326288550	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.ovLexhgdYCD3"
+1552326288904	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1552326288904	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1552326290206	Marionette	INFO	Listening on port 38559
+1552326290259	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Parent 5016, Gecko_IOThread] WARNING: pipe error (71): Connection reset by peer: file /build/firefox-HN7tk_/firefox-65.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 349
+1552326298579	Marionette	INFO	Stopped listening on port 38559
+1552326353895	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.624eQbXjSNLw"
+Running Firefox as root in a regular user's session is not supported.  ($HOME is /home/jacob which is owned by jacob.)
+1552326634962	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.dxzMU5j1PqeY"
+Running Firefox as root in a regular user's session is not supported.  ($HOME is /home/jacob which is owned by jacob.)
+1552326646765	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.9vt4xFsuzKtu"
+Running Firefox as root in a regular user's session is not supported.  ($HOME is /home/jacob which is owned by jacob.)
+1552326664772	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.Z8D7fJiOwBDn"
+Running Firefox as root in a regular user's session is not supported.  ($HOME is /home/jacob which is owned by jacob.)
+1552326683805	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.KfSFgMSB7WAA"
+1552326684143	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1552326684143	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1552326685461	Marionette	INFO	Listening on port 42673
+1552326685527	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Parent 6204, Gecko_IOThread] WARNING: pipe error (87): Connection reset by peer: file /build/firefox-HN7tk_/firefox-65.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 349
+1552326689825	Marionette	INFO	Stopped listening on port 42673
+1552326710667	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.jJbNPucJvxPs"
+1552326711009	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1552326711009	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1552326712381	Marionette	INFO	Listening on port 33801
+1552326712492	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Parent 7169, Gecko_IOThread] WARNING: pipe error (79): Connection reset by peer: file /build/firefox-HN7tk_/firefox-65.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 349
+[Parent 7169, Gecko_IOThread] WARNING: pipe error (87): Connection reset by peer: file /build/firefox-HN7tk_/firefox-65.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 349
+1552326716623	Marionette	INFO	Stopped listening on port 33801
+1552326719977	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.l1kDXSVqmRKu"
+Running Firefox as root in a regular user's session is not supported.  ($HOME is /home/jacob which is owned by jacob.)
+1552327029833	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.uTgTyG4Hq74v"
+Running Firefox as root in a regular user's session is not supported.  ($HOME is /home/jacob which is owned by jacob.)
+1552327049846	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.Q4z1NpiXcha0"
+Running Firefox as root in a regular user's session is not supported.  ($HOME is /home/jacob which is owned by jacob.)
+1552327068883	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.AaiVGv415v7C"
+1552327069219	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1552327069219	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1552327070527	Marionette	INFO	Listening on port 35079
+1552327070636	Marionette	WARN	TLS certificate errors will be ignored for this session
+1552327074219	Marionette	INFO	Stopped listening on port 35079
+1552327081974	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.ef38iJIM92yU"
+Running Firefox as root in a regular user's session is not supported.  ($HOME is /home/jacob which is owned by jacob.)
+1552327527305	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.Sn2sZJBySVFQ"
+Running Firefox as root in a regular user's session is not supported.  ($HOME is /home/jacob which is owned by jacob.)
+1552332469180	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.KNsMqFVMfVnZ"
+1552332469526	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1552332469527	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1552332470833	Marionette	INFO	Listening on port 44065
+1552332470891	Marionette	WARN	TLS certificate errors will be ignored for this session
+1552332521155	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.eocNMZ4pzAr0"
+1552332521495	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1552332521496	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1552332522864	Marionette	INFO	Listening on port 34813
+1552332522972	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Parent 11647, Gecko_IOThread] WARNING: pipe error (79): Connection reset by peer: file /build/firefox-HN7tk_/firefox-65.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 349
+[Parent 11647, Gecko_IOThread] WARNING: pipe error (98): Connection reset by peer: file /build/firefox-HN7tk_/firefox-65.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 349
+1552332530112	Marionette	INFO	Stopped listening on port 34813
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:188:13
+
+1552333319477	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.b6RVGRycFdal"
+1552333319816	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
+1552333319816	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
+1552333321169	Marionette	INFO	Listening on port 33179
+1552333321190	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Parent 12789, Gecko_IOThread] WARNING: pipe error (87): Connection reset by peer: file /build/firefox-HN7tk_/firefox-65.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 349
+1552333324523	Marionette	INFO	Stopped listening on port 33179
+[Parent 10713, Gecko_IOThread] WARNING: pipe error (96): Connection reset by peer: file /build/firefox-HN7tk_/firefox-65.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 349
+1552333662172	Marionette	INFO	Stopped listening on port 44065

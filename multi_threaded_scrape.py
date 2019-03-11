@@ -64,7 +64,7 @@ def main():
     task_manager.conn.close()
 
 
-def make_unique_tor_sessions(number_of_sessions, login_url, username, password, tor_dir="etc/tor/"):
+def make_unique_tor_sessions(number_of_sessions, login_url, username, password, tor_dir="/etc/tor/"):
     tor_sessions = []
     ips = []
 
@@ -92,6 +92,7 @@ def make_unique_tor_sessions(number_of_sessions, login_url, username, password, 
                 print("Tor session {} was removed after failing to acquire a unique identity".format(i))
                 break
             tor_session.get_new_identity()
+            # todo - might not make sense to include logging in here. Revisit
             dm_login(login_url, username, password, tor_session.SOCKSPort)
             retries += 1
 
