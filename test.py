@@ -1,7 +1,8 @@
-from selenium import webdriver
-import subprocess
+from tor_session import DmSession
 
-driver = webdriver.Firefox()
-
-
-subprocess.call(['sudo', './venv/bin/python', 'test2.py'])
+ds = DmSession()
+ds.base_url = "http://jirdqewsia3p2prz.onion/"
+ds.username = "odrs"
+ds.password = "odrs"
+ds.login()
+print(ds.get(ds.base_url).text)

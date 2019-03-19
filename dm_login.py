@@ -7,36 +7,32 @@ from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
 def dm_login(url, username, password, port):
 
-    # #binary_path = r"/home/jacob/Desktop/firefox"
-    #
-    # # Building the profile, setting the port equal to tor on localhost
-    # profile = webdriver.FirefoxProfile()
-    # profile.set_preference("network.proxy.type", 1)
-    # profile.set_preference("network.proxy.socks", "127.0.0.1")
-    # profile.set_preference("network.proxy.socks_port", port)
-    # profile.set_preference("network.proxy.socks_remote_dns", True)
-    #
-    # # # Tor Browser settings, to bypass fingerprinting
-    # # profile.set_preference("places.history.enabled", False)
-    # # profile.set_preference("privacy.clearOnShutdown.offlineApps", True)
-    # # profile.set_preference("privacy.clearOnShutdown.passwords", True)
-    # # profile.set_preference("privacy.clearOnShutdown.siteSettings", True)
-    # # profile.set_preference("privacy.sanitize.sanitizeOnShutdown", True)
-    # # profile.set_preference("signon.rememberSignons", False)
-    # # profile.set_preference("network.dns.disablePrefetch", True)
-    # # profile.set_preference("network.http.sendRefererHeader", 0)
-    #
-    # profile.update_preferences()
-    #
-    # # Setting the binary path for firefox
-    # #binary = FirefoxBinary(binary_path)
-    #
-    # # make browser headless
-    # options = webdriver.FirefoxOptions()
-    # # options.headless = True
-    #
-    # # driver = webdriver.Firefox(firefox_profile=profile, options=options)
-    driver = webdriver.Firefox()
+    # Building the profile, setting the port equal to tor on localhost
+    profile = webdriver.FirefoxProfile()
+    profile.set_preference("network.proxy.type", 1)
+    profile.set_preference("network.proxy.socks", "127.0.0.1")
+    profile.set_preference("network.proxy.socks_port", port)
+    profile.set_preference("network.proxy.socks_remote_dns", True)
+
+    # Tor Browser settings, to bypass fingerprinting
+    profile.set_preference("places.history.enabled", False)
+    profile.set_preference("privacy.clearOnShutdown.offlineApps", True)
+    profile.set_preference("privacy.clearOnShutdown.passwords", True)
+    profile.set_preference("privacy.clearOnShutdown.siteSettings", True)
+    profile.set_preference("privacy.sanitize.sanitizeOnShutdown", True)
+    profile.set_preference("signon.rememberSignons", False)
+    profile.set_preference("network.dns.disablePrefetch", True)
+    profile.set_preference("network.http.sendRefererHeader", 0)
+
+    profile.update_preferences()
+
+    # Setting the binary path for firefox
+
+    # make browser headless
+    options = webdriver.FirefoxOptions()
+    options.headless = True
+
+    driver = webdriver.Firefox(firefox_profile=profile, options=options)
 
     while True:
         driver.get(url)
