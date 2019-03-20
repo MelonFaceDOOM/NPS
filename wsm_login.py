@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementClickInterceptedException
 import sys
 
-def wsm_login(url, username, password, port):
+def wsm_login(url, username, password, port, headless=True):
 
     binary_path = r"C:\Users\JMILLER.AD\AppData\Local\Mozilla Firefox\firefox.exe"
 
@@ -37,7 +37,7 @@ def wsm_login(url, username, password, port):
 
     # make browser headless and launch
     options = webdriver.FirefoxOptions()
-    options.headless = True
+    options.headless = headless
     driver = webdriver.Firefox(firefox_binary=binary, firefox_profile=profile, options=options)
 
     # Complete first captcha to get to login page
@@ -51,7 +51,7 @@ def wsm_login(url, username, password, port):
         try:
             driver.find_element_by_xpath("//button[@class=' btn btn-block btn3d btn-info']").click()
         
-        # Try to account for rare error where the submit button is obscured
+        # This is to account for a rare error where the submit button is obscured
         # There are ways to bypass this and submit anyway, but I suspect this could be a test to see if the user is a machine
         # So I think it is better to simply re-load the page and try again
         except ElementClickInterceptedException:
