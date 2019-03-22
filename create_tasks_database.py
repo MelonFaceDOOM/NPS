@@ -3,12 +3,13 @@ import os
 from datetime import datetime
 
 
-def create_tasks_database():
-    urls = get_urls()
+def create_tasks_database(market, urls=None):
 
-    market = "dream_market"
+    if urls is None:
+        urls = get_urls()
+
     date = datetime.now().strftime('%Y_%m_%d')
-    filename = "{}_{}.db".format(market, date)
+    filename = "{}_{}.db".format(market, date) # todo - first check to see if file already exists
 
     conn = init_db(filename)
     c = conn.cursor()
@@ -30,26 +31,18 @@ def create_tasks_database():
     
 def init_db(filename):
     assert (not os.path.isfile(filename)), "A database with the name {} already exists".format(filename)
-
     conn = sqlite3.connect(filename)
-
     c = conn.cursor()
-    # in order to confirm boolean restriction is working correctly
     c.execute('''CREATE TABLE Tasks
         (url TEXT NOT NULL UNIQUE,
-        completed BOOLEAN NOT NULL CHECK (completed IN(0,1ctvnews)),
+        completed BOOLEAN NOT NULL CHECK (completed IN(0,1)),
         page_text STRING,
         identified_timestamp DATETIME DEFAULT(STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW')),
         scraped_timestamp DATETIME);''')
-
-    # todo - add a Failures table to keep track of error messages
     return conn
     
     
 def get_urls():
-    # todo - replace with a function to actually gather a list of URLs for the specified market
-    # todo - consider moving the url-gathering to a different file and
-    # todo - just have that list of URLs be passed to this file
     urls = [
         "https://www.amazon.ca/",
         "https://tor.stackexchange.com/questions/2006/how-to-run-multiple-tor-browsers-with-different-ips",
@@ -88,4 +81,4 @@ def get_urls():
     
     
 if __name__ == "__main__":
-    create_tasks_database()
+    create_tasks_database(market="test")

@@ -9,91 +9,67 @@
 #     scraped_timestamp DATETIME
 
 from queue import Queue
-import requests
 import logging
 from threading import Thread, Lock
 from create_tasks_database import create_tasks_database
 from datetime import datetime
 import sqlite3
-import os
-from tor_session import TorSession
-from dm_login import dm_login
-from get_best_dm_link import get_best_dm_link
+from tor_session import DmSession
+from dm_map_pages import dm_map_pages
 
 
 def main():
     THREADS_PER_SESSION = 10
     NUMBER_OF_SESSIONS = 10
-    USERNAME = "odrs"  # Todo - get username and password from a pool that keeps track of where they are banned
-    PASSWORD = "odrs"  # Todo - get username and password from a pool that keeps track of where they are banned
-    # KNOWN_ERRORS is a list of strings that, if found in a page, indicates a known error page
-    KNOWN_ERRORS = ["ddos protection"]
-    logging.basicConfig(level=logging.DEBUG,
-                        format='(%(threadName)-9s) %(message)s',)
 
-    login_url = get_best_dm_link()
-    # login_url = "http://lchudifyeqm4ldjj.onion/?ai=1675"
+    logging.basicConfig(level=logging.DEBUG,
+                        format='(%(threadName)-9s) %(message)s',
+                        filename="scrape.log")
 
     # create database with links to scrape
-    db_filepath = create_tasks_database()
+    urls = dm_map_pages()
+    db_filepath = create_tasks_database(market="dream_market", urls=urls)
 
     # make unique tor sessions
-    tor_sessions = make_unique_tor_sessions(NUMBER_OF_SESSIONS,
-                                            login_url=login_url,
-                                            username=USERNAME,
-                                            password=PASSWORD)
+    dm_sessions = make_unique_tor_sessions(NUMBER_OF_SESSIONS)
 
     # sign into each session using selenium, pass to requests tor_session object
-    for tor_session in tor_sessions:
-        # todo - test this: it's possible that selenium auto-closing after logging in
-        # todo - might make the cookies not suffice when passed to the requests session
-        cookies = dm_login(login_url, USERNAME, PASSWORD, tor_session.SOCKSPort)
-        tor_session.pass_cookies(cookies)
+    for ds in dm_sessions:
+        ds.login()
 
-    task_manager = TaskManager(login_url=login_url,
-                               username=USERNAME,
-                               password=PASSWORD,
-                               known_errors=KNOWN_ERRORS,
-                               db_filepath=db_filepath)
+    task_manager = TaskManager(db_filepath=db_filepath)
 
     # assign x threads per tor_session to begin scraping
-    for tor_session in tor_sessions:
+    for ds in dm_sessions:
         for i in range(THREADS_PER_SESSION):
-            task_manager.start_thread(tor_session=tor_session)
+            task_manager.start_thread(dm_session=ds)
     task_manager.q.join()
     task_manager.conn.close()
 
 
-def make_unique_tor_sessions(number_of_sessions, login_url, username, password, tor_dir="/etc/tor/"):
+def make_unique_tor_sessions(number_of_sessions):
     tor_sessions = []
     ips = []
 
     for i in range(number_of_sessions):
-
         SOCKSPort = 40000 + i
         ControlPort = 41000 + i
-
-        torrc_dir = os.path.join(tor_dir, "torrc.{}".format(i))
-
-        tor_session = TorSession(SOCKSPort=SOCKSPort,
-                                 ControlPort=ControlPort,
-                                 torrc_dir=torrc_dir)
+        ds = DmSession(SOCKSPort=SOCKSPort, ControlPort=ControlPort)
 
         # for each session, ensure IP is unique.
         # for duplicates, get new identity
         retries = 0
         max_retries = 5
         while True:
-            if tor_session.ip not in ips:
-                tor_sessions.append(tor_session)
-                ips.append(tor_session.ip)
+            if ds.ip not in ips:
+                tor_sessions.append(ds)
+                ips.append(ds.ip)
                 break
             elif retries >= max_retries:
                 print("Tor session {} was removed after failing to acquire a unique identity".format(i))
                 break
-            tor_session.get_new_identity()
+            ds.get_new_identity()
             # todo - might not make sense to include logging in here. Revisit
-            dm_login(login_url, username, password, tor_session.SOCKSPort)
             retries += 1
 
     return tor_sessions
@@ -103,12 +79,8 @@ class TaskManager:
     # requires db_filepath to initialize
     # start_thread and scrape require a TorSession object
 
-    def __init__(self, login_url, username, password, known_errors, db_filepath):
+    def __init__(self, db_filepath):
         self.lock = Lock()
-        self.login_url = login_url
-        self.username = username
-        self.password = password
-        self.known_errors = known_errors
         logging.debug("Connecting to database: {}".format(db_filepath))
         self.conn = sqlite3.connect(db_filepath, check_same_thread=False)
         logging.debug("Connected to database: {}".format(db_filepath))
@@ -136,32 +108,17 @@ class TaskManager:
             self.conn.commit()
         logging.debug("Lock released")
 
-    def start_thread(self, tor_session):
-        worker = Thread(target=self.scrape, args=(tor_session, self.q, self.conn))
+    def start_thread(self, dm_session):
+        worker = Thread(target=self.scrape, args=(dm_session, self.q, self.conn))
         worker.setDaemon(True)
         worker.start()
 
-    def scrape(self, tor_session):
-
+    def scrape(self, dm_session):
         while not self.q.empty():
             work = self.q.get()
-            try:
-                page_text = tor_session.get(work[1]).text
-            except requests.exceptions.RequestException as e:
-                page_text = e  # todo - add different procedures depending on error
-                               # todo - probably want to get new identity after a timeout, but not a 404
-                logging.debug("tried to scrape {} but encountered the following exception: \n {}".format(work[1], e))
-
-            # make sure page loaded correctly before marking as completed
-            page_error = [known_error for known_error in self.known_errors if known_error in page_text]
-            if page_error > 0:
-                logging.debug("Tried to scrape {} but encountered error: ".format(work[1], page_error))
-                # todo - may be a good idea to add a with self.lock statement for the new identity/logging in
-                tor_session.get_new_identity()
-                dm_login(self.login_url, self.username, self.password, tor_session.SOCKSPort)
-            else:
-                self.update_task_database(1, page_text, work[1])
-                logging.debug("Successfully scraped {}".format(work[1]))
+            page_text = dm_session.dm_get(work[1]).text
+            self.update_task_database(1, page_text, work[1])
+            logging.debug("Scraped %s", work[1])
             self.q.task_done()
 
 

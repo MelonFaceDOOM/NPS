@@ -9,35 +9,29 @@
 import re
 from lxml import html
 import requests
-from tor_session import TorSession
-from dm_login import dm_login
-import sys
+from tor_session import DmSession
 
 
-def main():
-    BASE_URL = "7ep7acrkunzdcw3l.onion"
-    USERNAME = "odrs"  # Todo - get username and password from a pool that keeps track of where they are banned
-    PASSWORD = "odrs"  # Todo - get username and password from a pool that keeps track of where they are banned
+def dm_map_pages():
+    ds = DmSession()
+    ds.get_best_url()
+    ds.login()
 
-    tor_session = TorSession()
-    cookies = dm_login(url=BASE_URL, username=USERNAME, password=PASSWORD, port=tor_session.SOCKSPort)
-    tor_session.pass_cookies(cookies=cookies)
-
-    page_content = get_or_relogin("{}/?category=104".format(BASE_URL))
+    page_content = ds.dm_get("{}/?category=104".format(ds.base_url))
     tree = html.fromstring(page_content.text)
 
     drug_categories = tree.xpath("//div[@class='category  depth1']/a")
     urls_with_page_count = []
     for d in drug_categories:
-        cat_url = requests.compat.urljoin(BASE_URL, d.attrib['href'])
+        cat_url = requests.compat.urljoin(ds.base_url, d.attrib['href'])
 
-        subtree = html.fromstring(get_or_relogin(cat_url).text)
+        subtree = html.fromstring(ds.dm_get(cat_url).text)
 
         sub_cats = subtree.xpath("//div[@class='category  depth2']/a")
         if len(sub_cats) > 0:
             for s in sub_cats:
-                sub_cat_url = requests.compat.urljoin(BASE_URL, s.attrib['href'])
-                subtree = html.fromstring(get_or_relogin(sub_cat_url).text)
+                sub_cat_url = requests.compat.urljoin(ds.base_url, s.attrib['href'])
+                subtree = html.fromstring(ds.dm_get(sub_cat_url).text)
                 page_count = count_pages(subtree)
                 urls_with_page_count.append((sub_cat_url, page_count))
         else:
@@ -50,20 +44,6 @@ def main():
         all_urls += urls
 
     return all_urls
-
-def get_or_relogin(url):
-    max_retries = 5
-    retries = 0
-    while True:
-        if retries >= max_retries:
-            sys.exit("Max retries reached on trying to access {}".format(url))
-        try:
-            return tor_session.get(url)
-        except:
-            tor_session.get_new_identity()
-            cookies = dm_login(url=BASE_URL, username=USERNAME, password=PASSWORD, port=tor_session.SOCKSPort)
-            tor_session.pass_cookies(cookies=cookies)
-            retries += 1
 
 
 def count_pages(tree):
@@ -88,4 +68,4 @@ def gen_url_list(url, num_pages):
 
 
 if __name__ == "__main__":
-    main()
+    dm_map_pages()

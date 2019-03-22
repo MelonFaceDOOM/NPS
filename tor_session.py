@@ -6,7 +6,6 @@ requires a template file, "torrc_template"
 import subprocess
 from stem import Signal
 from stem.control import Controller
-import requests
 import warnings
 from os import path
 import base64
@@ -16,6 +15,8 @@ from selenium import webdriver
 import requests
 from lxml import html
 import re
+import sys
+import logging
 
 
 class TorSession(requests.Session):
@@ -82,11 +83,20 @@ class TorSession(requests.Session):
 
 
 class DmSession(TorSession):
-    def __init__(self):
-        super().__init__()
+    logging.basicConfig(filename='DmSession.log', filemode='w', level=logging.DEBUG)
+
+    def __init__(self, SOCKSPort=9050, ControlPort=9051, torrc_dir=None):
+        if torrc_dir is None:
+            torrc_dir = path.relpath("tor/torrc")
+        super().__init__(SOCKSPort=SOCKSPort, ControlPort=ControlPort, torrc_dir=torrc_dir)
         self.base_url = ""
         self.username = ""
         self.password = ""
+        self.known_errors = [
+            "ddos protection",
+            "captcha"
+        ]
+        self.logger = logging.getLogger(__name__)
 
     def get_best_url(self):
 
@@ -209,6 +219,45 @@ class DmSession(TorSession):
                 break  # captcha did not fail. Quit loop
 
         return driver.get_cookies()
+
+    def dm_get(self, url):
+        # todo - make sure url is in the same domain as self.base_url
+
+        max_retries = 5
+        retries = 0
+        while True:
+            # first, check to see if get(url) works successfully
+            self.logger.debug("trying to get url: %s", url)
+            try:
+                page = self.get(url)
+                self.logger.debug("successfully reached url: %s", url)
+            except requests.exceptions.RequestException as e:
+                retries += 1
+                if retries < max_retries:
+
+                    self.logger.info("getting new identity after failing to get url", exc_info=True)
+                    self.get_new_identity()
+                    self.login()
+                    # todo - consider getting a new mirror (especially for timeout error)
+                else:
+                    self.logger.info("max retries reached; failed to reach url", exc_info=True)
+                    return e
+
+            # second, confirm that we reached the intended page, and not an error page
+            page_errors = [known_error for known_error in self.known_errors if known_error in page.text]
+            if len(page_errors) > 0:
+                for error in page_errors:
+                    self.logger.info("error page reached (%s) when trying to access url: %s", error, url)
+                retries += 1
+                if retries < max_retries:
+                    self.logger.info("getting new identity after failing to get url", exc_info=True)
+                    self.get_new_identity()
+                    self.login()
+                else:
+                    self.logger.debug("max retries reached; failed to reach url", exc_info=True)
+                    sys.exit()
+            else:
+                return page
 
 
 def measure_load_time(tor_session, url):
