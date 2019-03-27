@@ -14,7 +14,9 @@ from tor_session import DmSession
 
 def dm_map_pages():
     ds = DmSession()
-    ds.get_best_url()
+    ds.base_url = "http://xsuee6v24g2q6phb.onion"
+    ds.username = "odrs"
+    ds.password = "odrs"
     ds.login()
 
     page_content = ds.dm_get("{}/?category=104".format(ds.base_url))
@@ -33,9 +35,11 @@ def dm_map_pages():
                 sub_cat_url = requests.compat.urljoin(ds.base_url, s.attrib['href'])
                 subtree = html.fromstring(ds.dm_get(sub_cat_url).text)
                 page_count = count_pages(subtree)
+                print("{} pages found in category {}".format(page_count, sub_cat_url))
                 urls_with_page_count.append((sub_cat_url, page_count))
         else:
             page_count = count_pages(subtree)
+            print("{} pages found in category {}".format(page_count, sub_cat_url))
             urls_with_page_count.append((cat_url, page_count))
 
     all_urls = []

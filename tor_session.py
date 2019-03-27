@@ -67,6 +67,7 @@ class TorSession(requests.Session):
             new_ip = self.get('http://httpbin.org/ip').text
             if new_ip != self.ip:
                 self.ip = new_ip
+                break
             if retries >= max_retries:
                 warnings.warn("Warning: Unable to obtain new identity after {} tries".format(max_retries))
             retries += 1
@@ -94,7 +95,6 @@ class DmSession(TorSession):
         self.password = ""
         self.known_errors = [
             "ddos protection",
-            "captcha"
         ]
         self.logger = logging.getLogger(__name__)
 
@@ -133,6 +133,7 @@ class DmSession(TorSession):
 
         # sort first by number of successful responses, then average response time as a tie-breaker
         sorted_urls = sorted(new_list, key=lambda x: (-x[1], x[2]))
+        print(sorted_urls) # temporary test
         best_url = sorted_urls[0][0]
 
         pattern = "^.+[.]onion"
@@ -241,6 +242,8 @@ class DmSession(TorSession):
                     # todo - consider getting a new mirror (especially for timeout error)
                 else:
                     self.logger.info("max retries reached; failed to reach url", exc_info=True)
+                    print(e)  # todo - temporary
+                    sys.exit()  # todo - temporary
                     return e
 
             # second, confirm that we reached the intended page, and not an error page
