@@ -1,7 +1,7 @@
 from dm_map_pages import dm_map_pages
-from tor_session import DmSession
 
-ds = DmSession()
+dm_list = dm_map_pages()
 
-urls = dm_map_pages()
-print(urls[:10])
+with open("dm_mapped_pages.txt","w") as f:
+    for item in dm_list:
+        f.write("%s\n" % item)

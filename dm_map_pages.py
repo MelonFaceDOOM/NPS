@@ -14,7 +14,7 @@ from tor_session import DmSession
 
 def dm_map_pages():
     ds = DmSession()
-    ds.base_url = "http://xsuee6v24g2q6phb.onion"
+    ds.base_url = "http://t3e6ly3uoif4zcw2.onion"
     ds.username = "odrs"
     ds.password = "odrs"
     ds.login()

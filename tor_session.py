@@ -64,12 +64,17 @@ class TorSession(requests.Session):
             with Controller.from_port(port=self.ControlPort) as controller:
                 controller.authenticate(password="imamelon")
                 controller.signal(Signal.NEWNYM)
+            super().__init__()  # necessary to get new session object for new ip to work on linux for some reason
+            self.proxies = {}
+            self.proxies['http'] = 'socks5h://localhost:{}'.format(self.SOCKSPort)
+            self.proxies['https'] = 'socks5h://localhost:{}'.format(self.SOCKSPort)
             new_ip = self.get('http://httpbin.org/ip').text
             if new_ip != self.ip:
                 self.ip = new_ip
                 break
             if retries >= max_retries:
                 warnings.warn("Warning: Unable to obtain new identity after {} tries".format(max_retries))
+                break
             retries += 1
 
     def pass_cookies(self, cookies):
