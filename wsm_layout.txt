@@ -1,0 +1,233 @@
+I think form[catB] may be the previous thing that you came from, and menuCatB may be the one you actually need to fill out for sub-cats
+Same for form[catM] and form[catT]
+It's possible that the only value that matters is menuCatM/menuCatB/menuCatT, as they all seem unique
+
+Cannabis
+form[catB]	0
+form[catM]	0
+form[catT]	1
+menuCatM	1
+
+Cannabis - Weed
+form[catB]	0 (was 27 on second try, and 2 on third try -- need to look more into whether this field matters)
+form[catM]	1
+form[catT]	1
+menuCatB	1
+
+Cannabis - Hashish
+form[catB]	1
+form[catM]	1
+form[catT]	1
+menuCatB	2
+
+
+Cannabis - Edibles
+form[catB]	2
+form[catM]	1
+form[catT]	1
+menuCatB	15
+
+Cannabis - Concentrates
+form[catB]	15
+form[catM]	1
+form[catT]	1
+menuCatB	16
+
+Cannabis - Seeds
+form[catB]	16
+form[catM]	1
+form[catT]	1
+menuCatB	17
+
+Cannabis - Synthetics
+form[catB]	17
+form[catM]	1
+form[catT]	1
+menuCatB	27
+
+MDMA
+form[catB]	1
+form[catM]	1
+form[catT]	1
+form[limit]	15
+menuCatM	4
+
+Benzos
+form[catB]	0
+form[catM]	0
+form[catT]	1
+menuCatM	7
+
+Ecstacy
+form[catB]	0
+form[catM]	7
+form[catT]	1
+menuCatM	8
+
+Opiates
+form[catB]	0
+form[catM]	8
+form[catT]	1
+menuCatM	9
+
+Steroids
+form[catB]	0
+form[catM]	9
+form[catT]	1
+menuCatM	10
+
+Stimulants
+form[catB]	0
+form[catM]	10
+form[catT]	1
+menuCatM	11
+
+Stimulants - Cocaine
+form[catB]	0
+form[catM]	11
+form[catT]	1
+menuCatB	3
+
+Stimulants - Methamphetamine
+form[catB]	3
+form[catM]	11
+form[catT]	1
+menuCatB	4
+
+Stimulants - Speed
+form[catB]	4
+form[catM]	11
+form[catT]	1
+menuCatB	5
+
+Stimulants - Other
+form[catB]	5
+form[catM]	11
+form[catT]	1
+menuCatB	6
+
+Pharmaceuticals
+form[catB]	6
+form[catM]	11
+form[catT]	1
+menuCatM	12
+
+Psychadelics
+form[catB]	0
+form[catM]	12
+form[catT]	1
+menuCatM	50
+
+Psychadelics - LSD
+form[catB]	0
+form[catM]	50
+form[catT]	1
+menuCatB	7
+
+Psychadelics - Mushrooms
+form[catB]	7
+form[catM]	50
+form[catT]	1
+menuCatB	8
+
+Psychadelics - Other
+form[catB]	8
+form[catM]	50
+form[catT]	1
+menuCatB	9
+
+Psychadelics - RC's
+form[catB]	9
+form[catM]	50
+form[catT]	1
+menuCatB	28
+
+Psychadelics - 2C-X
+form[catB]	28
+form[catM]	50
+form[catT]	1
+menuCatB	29
+
+Utensils
+form[catB]	29
+form[catM]	50
+form[catT]	1
+menuCatM	52
+
+Dissociatives
+form[catB]	0
+form[catM]	52
+form[catT]	1
+menuCatM	68
+
+Dissociatives - GBL
+form[catB]	0
+form[catM]	68
+form[catT]	1
+menuCatB	18
+
+Dissociatives - GHB
+form[catB]	18
+form[catM]	68
+form[catT]	1
+menuCatB	19
+
+Dissociatives - Ketamine
+form[catB]	19
+form[catM]	68
+form[catT]	1
+menuCatB	20
+
+Dissociatives - MXE
+form[catB]	20
+form[catM]	68
+form[catT]	1
+menuCatB	21
+
+Dissociatives - PCP
+form[catB]	21
+form[catM]	68
+form[catT]	1
+menuCatB	22
+
+Dissociatives - Other
+form[catB]	22
+form[catM]	68
+form[catT]	1
+menuCatB	23
+
+Alcohol
+form[catB]	23
+form[catM]	68
+form[catT]	1
+menuCatM	69
+
+Harm reduction
+form[catB]	0
+form[catM]	69
+form[catT]	1
+menuCatM	70
+
+Harm reduction - Naloxone
+form[catB]	0
+form[catM]	70
+form[catT]	1
+menuCatB	24
+
+Harm reduction - Needles
+form[catB]	24
+form[catM]	70
+form[catT]	1
+menuCatB	25
+
+Harm reduction - Test kits
+form[catB]	25
+form[catM]	70
+form[catT]	1
+menuCatB	26
+
+Tobacco
+form[catB]	26
+form[catM]	70
+form[catT]	1
+menuCatM	71

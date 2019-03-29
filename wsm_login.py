@@ -58,7 +58,7 @@ def wsm_login(url, username, password, port, headless=True):
             driver.get(url)
             continue
 
-        element = WebDriverWait(driver,60).until(
+        element = WebDriverWait(driver,180).until(
             lambda driver: driver.find_elements(By.ID,"form_username") or \
             driver.find_elements_by_xpath(
                 '//div[(@class="alert alert-danger width-100") and (contains(text(),"One or more errors occured"))]'))
@@ -90,9 +90,8 @@ def wsm_login(url, username, password, port, headless=True):
 
         # Submit the form
         driver.find_element_by_xpath("//button[@class='btn btn-sm btn-primary']").click()
-        
-        
-        element = WebDriverWait(driver,60).until(
+
+        element = WebDriverWait(driver,180).until(
             lambda driver: driver.find_elements(By.ID,"menu-t-1") or \
             driver.find_elements_by_xpath(
                 '//div[(@class="alert alert-danger width-100") and (contains(text(),"One or more errors occured"))]'))
