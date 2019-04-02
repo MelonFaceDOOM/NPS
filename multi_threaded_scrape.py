@@ -14,7 +14,7 @@ from threading import Thread, Lock
 from create_tasks_database import create_tasks_database
 from datetime import datetime
 import sqlite3
-from tor_session import DmSession
+from tor_session import DMSession
 from dm_map_pages import dm_map_pages
 
 
@@ -54,7 +54,7 @@ def make_unique_tor_sessions(number_of_sessions):
     for i in range(number_of_sessions):
         SOCKSPort = 40000 + i
         ControlPort = 41000 + i
-        ds = DmSession(SOCKSPort=SOCKSPort, ControlPort=ControlPort)
+        ds = DMSession(SOCKSPort=SOCKSPort, ControlPort=ControlPort)
 
         # for each session, ensure IP is unique.
         # for duplicates, get new identity

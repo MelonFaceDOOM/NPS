@@ -1,5 +1,5 @@
 import unittest
-from tor_session import DmSession
+from tor_session import DMSession
 
 class TestDmSession(unittest.TestCase):
 
@@ -12,7 +12,7 @@ class TestDmSession(unittest.TestCase):
         pass
 
     def test_dm_session(self):
-        ds = DmSession()
+        ds = DMSession()
         print(ds.ip)
         self.assertEqual(ds.get("http://google.com").status_code, 200)
         print("successfully reached google.com")

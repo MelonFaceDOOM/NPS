@@ -1636,7 +1636,8 @@ console.error: BroadcastService:
   Stack:
     remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:188:13
 
-1553803528246	mozrunner::runner	INFO	Running command: "C:\\Users\\JMILLER.AD\\AppData\\Local\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\JMILLER.AD\\AppData\\Local\\Temp\\rust_mozprofile.5Q8LdONAfhSH"
+Exiting due to channel error.
+	INFO	Running command: "C:\\Users\\JMILLER.AD\\AppData\\Local\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\JMILLER.AD\\AppData\\Local\\Temp\\rust_mozprofile.5Q8LdONAfhSH"
 *** You are running in headless mode.
 1553803529833	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: resource://pdf.js/
 1553803529833	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid host permission: about:reader*
@@ -1712,7 +1713,8 @@ console.error: BroadcastService:
   Stack:
     remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:188:13
 
-1553885064773	mozrunner::runner	INFO	Running command: "C:\\Users\\JMILLER.AD\\AppData\\Local\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\JMILLER.AD\\AppData\\Local\\Temp\\rust_mozprofile.6ohfYRlNsvhq"
+Exiting due to channel error.
+	INFO	Running command: "C:\\Users\\JMILLER.AD\\AppData\\Local\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\JMILLER.AD\\AppData\\Local\\Temp\\rust_mozprofile.6ohfYRlNsvhq"
 *** You are running in headless mode.
 1553885146582	mozrunner::runner	INFO	Running command: "C:\\Users\\JMILLER.AD\\AppData\\Local\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\JMILLER.AD\\AppData\\Local\\Temp\\rust_mozprofile.cYo9Qd7HaNQO"
 *** You are running in headless mode.
@@ -1744,7 +1746,10 @@ console.error: BroadcastService:
   Stack:
     remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:190:13
 
-1553887944727	mozrunner::runner	INFO	Running command: "C:\\Users\\JMILLER.AD\\AppData\\Local\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\JMILLER.AD\\AppData\\Local\\Temp\\rust_mozprofile.eZ8PQPm1yPwS"
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\JMILLER.AD\\AppData\\Local\\Temp\\rust_mozprofile.eZ8PQPm1yPwS"
 *** You are running in headless mode.
 1553887946257	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
 1553887946258	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
@@ -1759,7 +1764,8 @@ console.error: BroadcastService:
   Stack:
     remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:190:13
 
-ots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+Exiting due to channel error.
+tension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
 1553888204038	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
 1553888204038	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
 1553888207614	Marionette	INFO	Listening on port 51978
@@ -1772,3 +1778,20 @@ console.error: BroadcastService:
   Stack:
     remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:190:13
 
+1554127540101	mozrunner::runner	INFO	Running command: "C:\\Users\\JMILLER.AD\\AppData\\Local\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\JMILLER.AD\\AppData\\Local\\Temp\\rust_mozprofile.5HOynh4G74GH"
+*** You are running in headless mode.
+1554127542324	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1554127542326	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1554127542326	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+1554127546683	Marionette	INFO	Listening on port 59727
+1554127546816	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: BroadcastService: 
+  receivedBroadcastMessage: handler for
+  remote-settings/monitor_changes
+  threw error:
+  Message: Error: Polling for changes failed: NetworkError when attempting to fetch resource..
+  Stack:
+    remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:190:13
+
+Exiting due to channel error.
+Exiting due to channel error.

@@ -5,9 +5,9 @@ from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementClickInterceptedException
 import sys
+
 
 def wsm_login(url, username, password, port, headless=True):
 
@@ -58,8 +58,8 @@ def wsm_login(url, username, password, port, headless=True):
             driver.get(url)
             continue
 
-        element = WebDriverWait(driver,180).until(
-            lambda driver: driver.find_elements(By.ID,"form_username") or \
+        element = WebDriverWait(driver, 180).until(
+            lambda driver: driver.find_elements(By.ID, "form_username") or
             driver.find_elements_by_xpath(
                 '//div[(@class="alert alert-danger width-100") and (contains(text(),"One or more errors occured"))]'))
 
@@ -85,14 +85,14 @@ def wsm_login(url, username, password, port, headless=True):
         im = get_captcha_image(driver)
         im.show()
 
-        captcha_text = input("Please enter captcha text")
+        captcha_text = input("Please enter captcha text\n")
         driver.find_element_by_xpath("//input[@id='form_captcha']").send_keys(captcha_text)
 
         # Submit the form
         driver.find_element_by_xpath("//button[@class='btn btn-sm btn-primary']").click()
 
-        element = WebDriverWait(driver,180).until(
-            lambda driver: driver.find_elements(By.ID,"menu-t-1") or \
+        element = WebDriverWait(driver, 180).until(
+            lambda driver: driver.find_elements(By.ID, "menu-t-1") or
             driver.find_elements_by_xpath(
                 '//div[(@class="alert alert-danger width-100") and (contains(text(),"One or more errors occured"))]'))
 
@@ -104,6 +104,7 @@ def wsm_login(url, username, password, port, headless=True):
             sys.exit("unable to identify whether or not captcha succeeded")    
 
     return driver.get_cookies()
+
 
 def get_captcha_image(driver):
     # find the captcha element

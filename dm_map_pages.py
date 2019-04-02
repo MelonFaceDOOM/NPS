@@ -9,11 +9,11 @@
 import re
 from lxml import html
 import requests
-from tor_session import DmSession
+from tor_session import DMSession
 
 
 def dm_map_pages():
-    ds = DmSession()
+    ds = DMSession()
     ds.base_url = "http://t3e6ly3uoif4zcw2.onion"
     ds.username = "odrs"
     ds.password = "odrs"
