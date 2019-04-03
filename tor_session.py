@@ -278,81 +278,102 @@ class WSMSession(TorSession):
         self.base_url = ""
         self.username = ""
         self.password = ""
+        self.token = ""
         self.known_errors = [
             "ddos protection",
         ]
         self.logger = logging.getLogger(__name__)
 
-    def complete_pre_login(self, tree, base_url):
-        self.token = tree.xpath("//input[@id='form__token']")[0].get("value")
+    def complete_security_check(self, content, base_url):
 
-        # get src, truncate leading text, convert b64 to image and open
-        captcha_b64 = tree.xpath("//img [@class='captcha_image']")[0].get("src")[23:]
-        im = Image.open(BytesIO(base64.b64decode(captcha_b64)))
-        im.show()
-        captcha_text = input("Please enter captcha text")
+        tree = html.fromstring(content.text)
+        while self.security_check_page(tree):
+            token = tree.xpath("//input[@id='form__token']")[0].get("value")
+            if self.token != token:
+                self.token = token
 
-        payload = {
-            'form[_token]': token,
-            'form[captcha]': captcha_text
-        }
+            # get src, truncate leading text, convert b64 to image and open
+            captcha_b64 = tree.xpath("//img [@class='captcha_image']")[0].get("src")[23:]
+            im = Image.open(BytesIO(base64.b64decode(captcha_b64)))
+            im.show()
+            captcha_text = input("Please enter captcha text")
 
-        headers = {
-            'Host': base_url,
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Accept-Encoding': 'gzip, deflate',
-            'Referer': 'http://{}'.format(base_url),
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': '84',
-            'Cookie': 'PHPSESSID={}'.format(self.cookies['PHPSESSID']),
-            'Connection': 'keep-alive',
-            'Upgrade-Insecure-Requests': '1'
-        }
+            payload = {
+                'form[_token]': self.token,
+                'form[captcha]': captcha_text
+            }
 
-        return self.post(url='http://{}'.format(base_url), data=payload, headers=headers)
+            headers = {
+                'Host': base_url,
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Accept-Encoding': 'gzip, deflate',
+                'Referer': 'http://{}'.format(base_url),
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': '84',
+                'Cookie': 'PHPSESSID={}'.format(self.cookies['PHPSESSID']),
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1'
+            }
 
-    def complete_login(self, tree, base_url):
-        self.token = tree.xpath("//input[@id='form__token']")[0].get("value")
-        #get src, truncate leading text, convert b64 to image and open
-        captcha_b64 = tree.xpath("//img [@class='captcha_image']")[0].get("src")[23:]
-        im = Image.open(BytesIO(base64.b64decode(captcha_b64)))
-        im.show()
-        captcha_text = input("Please enter captcha text")
+            content = self.post(url='http://{}'.format(base_url), data=payload, headers=headers)
+            tree = html.fromstring(content.text)
+        return content
 
-        payload = {
-            'form[_token]': token,
-            'form[captcha]': captcha_text,
-            'form[extendForm]': 'on',
-            'form[language]': 'en',
-            'form[password]': self.password,
-            'form[pictureQuality]': '0',
-            'form[sessionLength]': '43200',
-            'form[username]': self.username
-        }
+    def complete_login(self, content, base_url):
 
-        headers = {
-            'Host': base_url,
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Accept-Encoding': 'gzip, deflate',
-            'Referer': 'http://{}/login'.format(base_url),
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': '238',
-            'Cookie': 'PHPSESSID={}'.format(self.cookies['PHPSESSID']),
-            'Connection': 'keep-alive',
-            'Upgrade-Insecure-Requests': '1'
-        }
+        tree = html.fromstring(content.text)
+        while self.login_page(tree):
+            token = tree.xpath("//input[@id='form__token']")[0].get("value")
+            if self.token != token:
+                self.token = token
 
-        return self.post(url='http://{}/login'.format(base_url), data=payload, headers=headers)
+            #get src, truncate leading text, convert b64 to image and open
+            captcha_b64 = tree.xpath("//img [@class='captcha_image']")[0].get("src")[23:]
+            im = Image.open(BytesIO(base64.b64decode(captcha_b64)))
+            im.show()
+            captcha_text = input("Please enter captcha text")
+
+            payload = {
+                'form[_token]': token,
+                'form[captcha]': captcha_text,
+                'form[extendForm]': 'on',
+                'form[language]': 'en',
+                'form[password]': self.password,
+                'form[pictureQuality]': '0',
+                'form[sessionLength]': '43200',
+                'form[username]': self.username
+            }
+
+            headers = {
+                'Host': base_url,
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:60.0) Gecko/20100101 Firefox/60.0',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Accept-Encoding': 'gzip, deflate',
+                'Referer': 'http://{}/login'.format(base_url),
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': '238',
+                'Cookie': 'PHPSESSID={}'.format(self.cookies['PHPSESSID']),
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1'
+            }
+
+            content = self.post(url='http://{}/login'.format(base_url), data=payload, headers=headers)
+            tree = html.fromstring(content.text)
+
+        return content
 
     def create_account(self, tree, base_url):
         # todo - add random username/password
         username = ""
         password = ""
+
         token = tree.xpath("//input[@name='token']")[0].get("value")
+        if self.token != token:
+            self.token = token
+
         cid = tree.xpath("//input[@name='cid']")[0].get("value")
         # get src, truncate leading text, convert b64 to image and open
         captcha_b64 = tree.xpath("//div [@class='wms_captcha_field]/img")[0].get("src")[
@@ -389,22 +410,34 @@ class WSMSession(TorSession):
         # todo -- if successful, add username and password to self
         return self.post(url='http://{}/signup?ref=276'.format(base_url), data=payload, headers=headers)
 
-    def login(self):
-        page_content = self.get("http://{}/login".format(self.base_url))
-        tree = html.fromstring(page_content.text)
+    def security_check_page(self, tree):
+        return bool(tree.xpath(".// h3[text()='Security Check']"))
 
-        while not tree.xpath("//input[@id='form_username']"):
-            content = self.complete_pre_login(tree, self.base_url)
-            tree = html.fromstring(content.text)
+    def login_page(self, tree):
+        return bool(tree.xpath(".// h3[text()='Log In']"))
+
+    def login(self):
+        content = self.get("http://{}/login".format(self.base_url))
 
         # todo - add contigencies for returning back to pre-login screen or receiving a 404 response
-        while not tree.xpath("//input[@id='menu-t-1']"):
-            content = self.complete_login(tree, self.base_url)
+        while True:
             tree = html.fromstring(content.text)
+            if self.security_check_page(tree):
+                print('trying to complete security check')
+                content = self.complete_security_check(content, self.base_url)
+                print('security check completed')
+            elif self.login_page(tree):
+                print('trying to complete login')
+                content = self.complete_login(content, self.base_url)
+                print('login completed')
+                return content
+            else:
+                print("unknown page reached")
+                sys.exit()
 
-    def get_wsm_page(self, headers, token, catT="", catM="", catB="", menuCatM="", menuCatB="", page="1"):
+    def get_wsm_page(self, headers, catT="", catM="", catB="", menuCatM="", menuCatB="", page="1"):
         payload = {
-            'form[_token]': token,
+            'form[_token]': self.token,
             'form[catT]': catT,
             'form[catM]': catM,
             'form[catB]': catB,

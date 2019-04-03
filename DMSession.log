@@ -1,0 +1,16 @@
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): httpbin.org:80
+DEBUG:urllib3.connectionpool:http://httpbin.org:80 "GET /ip HTTP/1.1" 200 57
+DEBUG:stem:GETCONF __owningcontrollerprocess (runtime: 0.0003)
+INFO:stem:Error while receiving a control message (SocketClosed): received exception "read of closed file"
+INFO:stem:Error while receiving a control message (SocketClosed): received exception "peek of closed file"
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): httpbin.org:80
+DEBUG:urllib3.connectionpool:http://httpbin.org:80 "GET /ip HTTP/1.1" 200 57
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): wallst4qihu6lvsa.onion:80
+DEBUG:urllib3.connectionpool:http://wallst4qihu6lvsa.onion:80 "GET /login HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: wallst4qihu6lvsa.onion
+DEBUG:urllib3.connectionpool:http://wallst4qihu6lvsa.onion:80 "POST / HTTP/1.1" 302 None
+DEBUG:urllib3.connectionpool:http://wallst4qihu6lvsa.onion:80 "GET /index HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: wallst4qihu6lvsa.onion
+DEBUG:urllib3.connectionpool:http://wallst4qihu6lvsa.onion:80 "POST /login HTTP/1.1" 302 None
+DEBUG:urllib3.connectionpool:http://wallst4qihu6lvsa.onion:80 "GET /index HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): wallst4qihu6lvsa.onion:443
