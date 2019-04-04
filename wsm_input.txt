@@ -1,6 +1,1 @@
-{"catT": "1", 
-"catM": "0", 
-"catB": "0",
-"menuCatM": "1", 
-"menuCatB": "",
-"page": "1"}
+{"Harm reduction - Needles": ["", "25"], "Psychadelics": ["50", ""], "Benzos": ["7", ""], "Opiates": ["9", ""], "Tobacco": ["71", ""], "Cannabis - Seeds": ["", "17"], "Psychadelics - 2C-X": ["", "29"], "Dissociatives - GHB": ["", "19"], "Cannabis": ["1", ""], "Steroids": ["10", ""], "Harm reduction": ["70", ""], "MDMA": ["4", ""], "Cannabis - Synthetics": ["", "27"], "Cannabis - Edibles": ["", "15"], "Utensils": ["52", ""], "Stimulants - Cocaine": ["", "3"], "Dissociatives - PCP": ["", "22"], "Dissociatives - Ketamine": ["", "20"], "Pharmaceuticals": ["12", ""], "Harm reduction - Naloxone": ["", "24"], "Stimulants - Other": ["", "6"], "Stimulants - Methamphetamine": ["", "4"], "Psychadelics - Mushrooms": ["", "8"], "Psychadelics - LSD": ["", "7"], "Psychadelics - Other": ["", "9"], "Ecstacy": ["8", ""], "Cannabis - Weed": ["", "1"], "Dissociatives - MXE": ["", "21"], "Dissociatives - GBL": ["", "18"], "Cannabis - Hashish": ["", "2"], "Dissociatives - Other": ["", "23"], "Cannabis - Concentrates": ["", "16"], "Psychadelics - RCs": ["", "28"], "Dissociatives": ["68", ""], "Stimulants - Speed": ["", "5"], "Alcohol": ["69", ""], "Harm reduction - Test kits": ["", "26"], "Stimulants": ["11", ""]}

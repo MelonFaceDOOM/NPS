@@ -1,12 +1,3 @@
-# from dm_map_pages import dm_map_pages
-#
-# dm_list = dm_map_pages()
-#
-# with open("dm_mapped_pages.txt","w") as f:
-#     for item in dm_list:
-#         f.write("%s\n" % item)
-
-
 from tor_session import WSMSession
 import json
 import sys
@@ -32,61 +23,36 @@ headers['Content-Length'] = "315"
 headers['Upgrade-Insecure-Requests'] = "1"
 headers['PHPSESSID'] = ws.cookies['PHPSESSID']
 
-while True:
-    command = input("enter command")
+with open('wsm_input.txt', 'r') as file:
+    wsm_dict = json.load(file)
 
-    if command == "run":
+for key in wsm_dict:
+    m, b = wsm_dict[key]
 
-        with open('wsm_input.txt', 'r') as file:
-             wsm_dict = json.load(file)
+    try:
+        content = ws.get_wsm_page(headers=headers, menuCatM=m, menuCatB=b)
 
-        try:
-            content = ws.get_wsm_page(headers=headers,catT=wsm_dict['catT'],catM=wsm_dict['catM'],catB=wsm_dict['catB'],
-                             menuCatM=wsm_dict['menuCatM'], menuCatB=wsm_dict['menuCatB'])
-
-            if content.status_code == 200:
-                tree = html.fromstring(content.text)
-                for title in tree.xpath("//h4[@class='card-title']/a"):
-                    print(title.text)
-            elif content.status_code == 400:
-                print("bad request, try again")
-            elif content.status_code == 404:
-                print("404, trying to re-login...")
-                ws.login()
-
-        except requests.exceptions.RequestException as e:
-            print(e)
-            print("try again?")
-
-        else:
-            print("unknown error. quitting...")
+        if content.status_code == 200:
+            tree = html.fromstring(content.text)
+            titles = []
+            for title in tree.xpath("//h4[@class='card-title']/a"):
+                titles.append(title)
+            with open("wsm_drug_front_pages.txt", "a") as f:
+                f.write(key+"\n")
+                for title in titles:
+                    f.write(title+"\n")
+                f.write("\n"+"-"*50+"\n\n")
+        elif content.status_code == 400:
+            with open("wsm_drug_front_pages.txt", "a") as f:
+                f.write(key + "\n")
+                f.write("error 400 -- bad request")
+                f.write("\n" + "-" * 50 + "\n\n")
+        elif content.status_code == 404:
+            print("404, quitting...")
             sys.exit()
-
-    elif command == "index":
-        try:
-            content = ws.get("https://{}/index".format(ws.base_url))
-
-            if content.status_code == 200:
-                tree = html.fromstring(content.text)
-                if ws.login_page(tree) or ws.security_check_page(tree):
-                    print("logged out")
-                else:
-                    print("successfully loaded index page")
-            elif content.status_code == 400:
-                print("bad request, try again")
-            elif content.status_code == 404:
-                print("404, trying to re-login...")
-                ws.login()
-
-        except requests.exceptions.RequestException as e:
-            print(e)
-            print("try again?")
-
-    elif command in ("quit", "exit"):
-        sys.exit()
-
-    elif command == "login":
-        ws.login()
-
-    else:
-        print("command unknown. try again")
+    except requests.exceptions.RequestException as e:
+        with open("wsm_drug_front_pages.txt", "a") as f:
+            f.write(key + "\n")
+            f.write("error:\n")
+            f.write(e)
+            f.write("\n" + "-" * 50 + "\n\n")
