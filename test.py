@@ -38,10 +38,10 @@ for key in wsm_dict:
             for title in tree.xpath("//h4[@class='card-title']/a"):
                 titles.append(title)
             with open("wsm_drug_front_pages.txt", "a") as f:
-                f.write(key+"\n")
+                f.write(key + "\n")
                 for title in titles:
-                    f.write(title+"\n")
-                f.write("\n"+"-"*50+"\n\n")
+                    f.write(title + "\n")
+                f.write("\n" + "-" * 50 + "\n\n")
         elif content.status_code == 400:
             with open("wsm_drug_front_pages.txt", "a") as f:
                 f.write(key + "\n")
